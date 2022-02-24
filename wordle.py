@@ -75,7 +75,7 @@ plt.xlabel("Frequency")
 plt.ylabel("Letters")
 plt.show()
 
-sns.set(style="darkgrid", rc={'axes.labelsize': 10})
+sns.set(style="darkgrid", rc={'axes.labelsize': 20})
 fig, axs = plt.subplots(4, 7, figsize=(10, 10), sharex=True, sharey=True)
 x_labels = [x + 1 for x in range(5)]
 for row in range(4):
@@ -83,6 +83,6 @@ for row in range(4):
         letter = chr(ord('A') + (row * 7) + col)
         if letter <= 'Z':
             sns.barplot(x=x_labels, y=freq_in_position_by_letter[letter], ax=axs[row, col]) \
-                .set_xlabel(f"letter {letter.upper()}")
+                .set_xlabel(letter.upper())
 plt.suptitle("Wordle comparative letter frequency in position\n(sorted by letter frequency)")
 plt.show()
