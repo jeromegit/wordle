@@ -12,6 +12,7 @@ def print_dict_with_rank(title, d, top=20):
         print(f"{rank:>2} {key}: {value}")
         rank += 1
 
+
 # --- Calculate letter frequency total and per position
 letter_freq = defaultdict(int)
 letter_freq_in_position = defaultdict(lambda: defaultdict(int))
@@ -30,7 +31,6 @@ for letter, freq in sorted(letter_freq.items()):
     print(f"{letter.upper()}: {freq}")
 
 print_dict_with_rank("Letters sorted by frequency", letter_freq, 26)
-
 
 # --- Now that we have the letter frequency, calculate the "best words" to use
 words_with_freq_weight = {}
@@ -68,13 +68,16 @@ for letter, total_freq in sorted(letter_freq.items(), key=lambda item: item[1], 
 df = pd.DataFrame(freq_in_position_by_letter_with_letter)
 df = df.transpose().loc[::-1]  # .loc[::-1] will reverse the order
 
-df.set_index(0).plot(kind='barh', stacked=True)
+df.set_index(0).plot(kind='barh',
+                     stacked=True,
+                     figsize=(10, 10),
+                     title="Wordle letter frequency: total and broken down by position",
+                     xlabel="Frequency",
+                     ylabel="Letters")
 plt.legend(title="Position")
-plt.title("Wordle letter frequency: total and broken down by position")
-plt.xlabel("Frequency")
-plt.ylabel("Letters")
 plt.show()
 
+# -- In alphabetical order
 sns.set(style="darkgrid", rc={'axes.labelsize': 20})
 fig, axs = plt.subplots(4, 7, figsize=(10, 10), sharex=True, sharey=True)
 x_labels = [x + 1 for x in range(5)]
@@ -84,5 +87,19 @@ for row in range(4):
         if letter <= 'Z':
             sns.barplot(x=x_labels, y=freq_in_position_by_letter[letter], ax=axs[row, col]) \
                 .set_xlabel(letter.upper())
-plt.suptitle("Wordle comparative letter frequency in position\n(sorted by letter frequency)")
+plt.suptitle("Wordle comparative letter frequency in position\n(sorted alphabetically)")
+plt.show()
+
+# -- In frequency order
+sns.set(style="darkgrid", rc={'axes.labelsize': 20})
+fig, axs = plt.subplots(4, 7, figsize=(10, 10), sharex=True, sharey=True)
+x_labels = [x + 1 for x in range(5)]
+letter_count = 0
+for letter, total_freq in sorted(letter_freq.items(), key=lambda item: item[1], reverse=True):
+    row = int(letter_count / 7)
+    col = letter_count % 7
+    letter_count += 1
+    sns.barplot(x=x_labels, y=freq_in_position_by_letter[letter], ax=axs[row, col]) \
+        .set_xlabel(letter.upper())
+plt.suptitle("Wordle comparative letter frequency in position\n(sorted by descending letter total frequency)")
 plt.show()
