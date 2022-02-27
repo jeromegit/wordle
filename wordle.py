@@ -12,6 +12,7 @@ def print_dict_with_rank(title, d, top=20):
         print(f"{rank:>2} {key}: {value}")
         rank += 1
 
+
 # --- Calculate letter frequency total and per position
 letter_freq = defaultdict(int)
 letter_freq_in_position = defaultdict(lambda: defaultdict(int))
@@ -61,7 +62,8 @@ with open("five_letter_words_with_frequency.txt") as lines:
         rank, usage_freq, word = line.split()
         usage_freq = int(usage_freq)
         total_usage_freq += usage_freq
-        words_with_freq_and_usage_weight[word] = words_with_freq_and_position_weight.get(word, avg_freq_weight) * usage_freq
+        words_with_freq_and_usage_weight[word] = words_with_freq_and_position_weight.get(word,
+                                                                                         avg_freq_weight) * usage_freq
 avg_usage_freq = int(total_usage_freq / len(words_with_freq_and_usage_weight))
 
 # add to the list the words that weren't in the file
