@@ -35,6 +35,7 @@ print_dict_with_rank("Letters sorted by frequency", letter_freq, 26)
 # --- Now that we have the letter frequency, calculate the "best words" to use
 words_with_freq_weight = {}
 words_with_freq_and_position_weight = {}
+words_with_freq_and_position_weight_not_plural = {}
 total_freq_weight = 0
 with open("five_letter_words.txt") as word_list:
     for word in word_list:
@@ -53,6 +54,8 @@ with open("five_letter_words.txt") as word_list:
             total_freq_weight += freq_weight
             words_with_freq_weight[word] = freq_weight
             words_with_freq_and_position_weight[word] = freq_and_position_weight
+            if word[-1] != 's':
+                words_with_freq_and_position_weight_not_plural[word] = freq_and_position_weight
 avg_freq_weight = int(total_freq_weight / len(words_with_freq_weight))
 
 words_with_freq_and_usage_weight = {}
@@ -74,6 +77,8 @@ for word in words_with_freq_and_position_weight:
 print_dict_with_rank("Top words with most frequent unrepeated letters", words_with_freq_weight)
 print_dict_with_rank("Top words with most frequent unrepeated letters weighted by letter position",
                      words_with_freq_and_position_weight)
+print_dict_with_rank("Top words (not plural) with most frequent unrepeated letters weighted by letter position",
+                     words_with_freq_and_position_weight_not_plural)
 print_dict_with_rank("Top words with most frequent unrepeated letters weighted by letter position and usage freq",
                      words_with_freq_and_usage_weight)
 

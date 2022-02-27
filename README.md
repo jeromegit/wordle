@@ -121,6 +121,30 @@ Z: 135
 20 cores: 12121239
 ```
 
+### Top words (not plural) with most frequent unrepeated letters weighted by letter position --------
+ ```
+ 1 saner: 9367344
+ 2 sated: 9027395
+ 3 sager: 8934875
+ 4 saber: 8932014
+ 5 sayer: 8900742
+ 6 sawer: 8889984
+ 7 safer: 8889301
+ 8 saver: 8878972
+ 9 soled: 8759888
+10 sawed: 8633085
+11 saved: 8622073
+12 sober: 8492939
+13 sower: 8450909
+14 sired: 8378621
+15 sowed: 8194010
+16 siren: 8130465
+17 slier: 8049286
+18 sited: 7915171
+19 tared: 7890913
+20 laser: 7826592
+```
+
 ### Chart of Wordle letter frequency: total and broken down by position
 ![chart horizontal bar](images/wordle_letter_frequency_total_and_broken_down_by_position.png)
 
