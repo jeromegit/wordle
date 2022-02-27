@@ -1,10 +1,10 @@
 # Wordle Help
-This is some fun musing to help solve the daily NYT Wordle puzzle: 
+This is some fun letter/word stats to help solve the daily NYT Wordle puzzle: 
 https://www.nytimes.com/games/wordle/index.html
 
 Not cheating but aids on how to pick the right words/letters based on letter and word frequency
 
-It uses a file containing the list of all 5-letter words (including plural of 4-letter words) as its main source of data.
+It uses a file containing the list of all 5-letter words (including plural of 4-letter words which might not be used based on this article: https://screenrant.com/wordle-answers-updated-word-puzzle-guide/) as its main source of data.
 I don't know what the Wordle official word list is but so far all the words I have seen were in the list I'm using.
 
 Based on the words in that list, I was able to determine the list of letter frequency.
