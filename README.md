@@ -121,7 +121,7 @@ Z: 135
 20 cores: 12121239
 ```
 
-### Top words (not plural) with most frequent unrepeated letters weighted by letter position --------
+### Top words (not plural) with most frequent unrepeated letters weighted by letter position
  ```
  1 saner: 9367344
  2 sated: 9027395
