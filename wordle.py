@@ -12,7 +12,6 @@ def print_dict_with_rank(title, d, top=20):
         print(f"{rank:>2} {key}: {value}")
         rank += 1
 
-
 # --- Calculate letter frequency total and per position
 letter_freq = defaultdict(int)
 letter_freq_in_position = defaultdict(lambda: defaultdict(int))
@@ -35,6 +34,7 @@ print_dict_with_rank("Letters sorted by frequency", letter_freq, 26)
 # --- Now that we have the letter frequency, calculate the "best words" to use
 words_with_freq_weight = {}
 words_with_freq_and_position_weight = {}
+total_freq_weight = 0
 with open("five_letter_words.txt") as word_list:
     for word in word_list:
         word = word.rstrip()
@@ -49,12 +49,31 @@ with open("five_letter_words.txt") as word_list:
             letters_in_word.add(letter)
             position += 1
         if len(letters_in_word) == 5:
+            total_freq_weight += freq_weight
             words_with_freq_weight[word] = freq_weight
             words_with_freq_and_position_weight[word] = freq_and_position_weight
+avg_freq_weight = int(total_freq_weight / len(words_with_freq_weight))
+
+words_with_freq_and_usage_weight = {}
+total_usage_freq = 0
+with open("five_letter_words_with_frequency.txt") as lines:
+    for line in lines:
+        rank, usage_freq, word = line.split()
+        usage_freq = int(usage_freq)
+        total_usage_freq += usage_freq
+        words_with_freq_and_usage_weight[word] = words_with_freq_and_position_weight.get(word, avg_freq_weight) * usage_freq
+avg_usage_freq = int(total_usage_freq / len(words_with_freq_and_usage_weight))
+
+# add to the list the words that weren't in the file
+for word in words_with_freq_and_position_weight:
+    if not word not in words_with_freq_and_usage_weight:
+        words_with_freq_and_usage_weight[word] *= avg_usage_freq
 
 print_dict_with_rank("Top words with most frequent unrepeated letters", words_with_freq_weight)
 print_dict_with_rank("Top words with most frequent unrepeated letters weighted by letter position",
                      words_with_freq_and_position_weight)
+print_dict_with_rank("Top words with most frequent unrepeated letters weighted by letter position and usage freq",
+                     words_with_freq_and_usage_weight)
 
 # --- Chart letter frequencies by position
 freq_in_position_by_letter_with_letter = {}
